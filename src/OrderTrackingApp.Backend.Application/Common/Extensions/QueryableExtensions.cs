@@ -19,7 +19,7 @@ public static class QueryableExtensions
         var totalCount = await queryable.CountAsync(cancellationToken);
         var totalPages = (int)Math.Ceiling(totalCount / (double)(request.PageSize ?? DefaultPageSize));
         var items = await queryable
-                          .Skip(request.PageNumber ?? DefaultPageNumber * request.PageSize ?? DefaultPageSize)
+                          .Skip(((request.PageNumber ?? DefaultPageNumber) - 1) * (request.PageSize ?? DefaultPageSize))
                           .Take(request.PageSize ?? DefaultPageSize)
                           .ToArrayAsync(cancellationToken);
 

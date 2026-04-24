@@ -1,8 +1,10 @@
 using Microsoft.AspNetCore.HttpLogging;
 
+using OrderTrackingApp.Backend.Application;
 using OrderTrackingApp.Backend.Infrastructure;
 using OrderTrackingApp.Backend.Infrastructure.Persistence;
 using OrderTrackingApp.Backend.WebApi;
+using OrderTrackingApp.Backend.WebApi.Endpoints.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,7 +24,8 @@ builder.Services
                            options.CombineLogs = true;
                        });
 
-builder.Services.AddInfrastructure(builder.Configuration, builder.Host);
+builder.Services.AddApplication()
+       .AddInfrastructure(builder.Configuration, builder.Host);
 
 var app = builder.Build();
 
@@ -38,5 +41,7 @@ app.UseExceptionHandler()
    .UseHttpLogging();
 
 app.UseHttpsRedirection();
+
+app.MapEndpoints();
 
 app.Run();

@@ -9,9 +9,7 @@ internal record CreateOrderHandler(IDatabaseContext DatabaseContext) : IRequestH
 {
     public async Task<Order> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
     {
-        var order = request.Order;
-        order.CreatedAt = DateTimeOffset.UtcNow;
-        order.UpdatedAt = DateTimeOffset.UtcNow;
+        var order = new Order { Description = request.Description, CreatedAt = DateTimeOffset.UtcNow, UpdatedAt = DateTimeOffset.UtcNow };
 
         await DatabaseContext.Orders.AddAsync(order, cancellationToken);
         await DatabaseContext.SaveChangesAsync(cancellationToken);
