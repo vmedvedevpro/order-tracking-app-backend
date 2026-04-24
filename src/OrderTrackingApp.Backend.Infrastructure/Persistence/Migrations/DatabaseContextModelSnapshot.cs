@@ -24,16 +24,19 @@ namespace OrderTrackingApp.Backend.Infrastructure.Persistence.Migrations
 
             modelBuilder.Entity("OrderTrackingApp.Backend.Domain.Entities.Order", b =>
                 {
-                    b.Property<decimal>("OrderNumber")
+                    b.Property<long>("OrderNumber")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("numeric(20,0)");
+                        .HasColumnType("bigint");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("OrderNumber"));
 
                     b.Property<DateTimeOffset>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)");
 
                     b.Property<string>("Status")
                         .IsRequired()

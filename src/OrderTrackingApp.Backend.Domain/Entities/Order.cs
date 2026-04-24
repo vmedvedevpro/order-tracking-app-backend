@@ -4,7 +4,7 @@ namespace OrderTrackingApp.Backend.Domain.Entities;
 
 public class Order
 {
-    public ulong OrderNumber { get; set; }
+    public long OrderNumber { get; set; }
 
     public string Description { get; set; } = null!;
 
