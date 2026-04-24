@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\OrderTrackingApp.Backend.Application\OrderTrackingApp.Backend.Application.csproj" />
+      <ProjectReference Include="..\OrderTrackingApp.Backend.Domain\OrderTrackingApp.Backend.Domain.csproj" />
+    </ItemGroup>
+
+</Project>
