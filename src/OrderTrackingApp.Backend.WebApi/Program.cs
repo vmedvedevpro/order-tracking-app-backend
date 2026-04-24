@@ -6,6 +6,10 @@ using OrderTrackingApp.Backend.WebApi;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Configuration
+       .AddEnvironmentVariables()
+       .AddUserSecrets<Program>(true);
+
 builder.Services
        .AddEndpointsApiExplorer()
        .AddSwaggerGen()
