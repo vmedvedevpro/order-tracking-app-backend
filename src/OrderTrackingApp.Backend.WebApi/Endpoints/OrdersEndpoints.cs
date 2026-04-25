@@ -53,7 +53,7 @@ public static class OrdersEndpoints
              async ([AsParameters] GetOrdersQuery request, ISender sender, CancellationToken cancellationToken) =>
                  await sender.Send(request, cancellationToken)
              )
-         .WithSummary("Get order by order number")
+         .WithSummary("Get orders")
          .Produces<PagedResult<Order>>()
          .ProducesProblem(400)
          .ProducesProblem(500);

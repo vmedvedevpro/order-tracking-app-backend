@@ -29,8 +29,8 @@ internal static class DependencyInjection
                                                      });
 
     internal static IServiceCollection AddExceptionHandlers(this IServiceCollection services) =>
-        services.AddExceptionHandler<AppExceptionHandler>()
-                .AddExceptionHandler<BadRequestExceptionHandler>()
+        services.AddExceptionHandler<BadRequestExceptionHandler>()
                 .AddExceptionHandler<ValidationExceptionHandler>()
-                .AddExceptionHandler<NotFoundExceptionHandler>();
+                .AddExceptionHandler<NotFoundExceptionHandler>()
+                .AddExceptionHandler<GlobalExceptionHandler>();
 }
