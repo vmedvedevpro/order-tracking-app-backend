@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -8,6 +8,7 @@ using Microsoft.Extensions.Hosting;
 using Npgsql;
 
 using OrderTrackingApp.Backend.Application.Common.Interfaces;
+using OrderTrackingApp.Backend.Infrastructure.Messaging;
 using OrderTrackingApp.Backend.Infrastructure.Persistence;
 
 namespace OrderTrackingApp.Backend.Infrastructure;
@@ -18,7 +19,8 @@ public static class DependencyInjection
         this IServiceCollection services,
         IConfiguration configuration,
         IHostBuilder hostBuilder) =>
-        services.AddDatabase(configuration);
+        services.AddDatabase(configuration)
+                .AddMessaging(configuration);
 
     private static IServiceCollection AddDatabase(
         this IServiceCollection services,
@@ -29,11 +31,8 @@ public static class DependencyInjection
                          .ConfigureJsonOptions(new JsonSerializerOptions { AllowOutOfOrderMetadataProperties = true })
                          .EnableParameterLogging().Build();
 
-        return services.AddDbContext<DatabaseContext>(
-                           o => o.EnableSensitiveDataLogging().EnableDetailedErrors().UseNpgsql(dataSource),
-                           ServiceLifetime.Transient,
-                           ServiceLifetime.Transient)
-                       .AddTransient<IDatabaseContext>(provider => provider.GetRequiredService<DatabaseContext>())
+        return services.AddDbContext<DatabaseContext>(o => o.EnableSensitiveDataLogging().EnableDetailedErrors().UseNpgsql(dataSource))
+                       .AddScoped<IDatabaseContext>(provider => provider.GetRequiredService<DatabaseContext>())
                        .AddTransient<DatabaseInitializer>();
     }
 }
