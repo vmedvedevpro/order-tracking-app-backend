@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.HttpLogging;
 
 using OrderTrackingApp.Backend.Application;
 using OrderTrackingApp.Backend.Infrastructure;
+using OrderTrackingApp.Backend.Infrastructure.Configuration;
 using OrderTrackingApp.Backend.Infrastructure.Persistence;
 using OrderTrackingApp.Backend.WebApi;
 using OrderTrackingApp.Backend.WebApi.Endpoints.Extensions;
@@ -41,6 +42,8 @@ app.UseExceptionHandler()
    .UseHttpLogging();
 
 app.UseHttpsRedirection();
+
+app.UseTelemetry();
 
 app.MapEndpoints();
 

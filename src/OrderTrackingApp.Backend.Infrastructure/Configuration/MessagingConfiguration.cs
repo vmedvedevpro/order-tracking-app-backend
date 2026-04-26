@@ -10,7 +10,7 @@ using OrderTrackingApp.Backend.Infrastructure.Persistence;
 
 namespace OrderTrackingApp.Backend.Infrastructure.Messaging;
 
-internal static class MessagingExtensions
+internal static class MessagingConfiguration
 {
     public static IServiceCollection AddMessaging(this IServiceCollection services, IConfiguration configuration)
     {
