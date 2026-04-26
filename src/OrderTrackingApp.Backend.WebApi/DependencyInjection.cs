@@ -5,12 +5,18 @@ using System.Text.Unicode;
 
 using Microsoft.AspNetCore.Mvc;
 
+using OrderTrackingApp.Backend.Application.Common.Interfaces;
 using OrderTrackingApp.Backend.WebApi.ExceptionHandlers;
+using OrderTrackingApp.Backend.WebApi.Sse;
 
 namespace OrderTrackingApp.Backend.WebApi;
 
 internal static class DependencyInjection
 {
+    internal static IServiceCollection AddOrderStatusSse(this IServiceCollection services) =>
+        services.AddSingleton<OrderStatusSseBroker>()
+                .AddSingleton<IOrderStatusNotifier>(sp => sp.GetRequiredService<OrderStatusSseBroker>());
+
     internal static IServiceCollection ConfigureJsonOptions(this IServiceCollection services) =>
         services.ConfigureHttpJsonOptions(o =>
                                           {

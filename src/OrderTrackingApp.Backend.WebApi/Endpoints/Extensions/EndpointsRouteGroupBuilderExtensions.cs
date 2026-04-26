@@ -3,5 +3,6 @@
 public static class EndpointsRouteGroupBuilderExtensions
 {
     public static void MapEndpoints(this IEndpointRouteBuilder builder) =>
-        builder.MapGroup("api/v1").MapOrders();
+        builder.MapGroup("api/v1")
+               .MapOrders();
 }

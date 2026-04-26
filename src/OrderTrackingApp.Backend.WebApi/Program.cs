@@ -26,7 +26,8 @@ builder.Services
                        });
 
 builder.Services.AddApplication()
-       .AddInfrastructure(builder.Configuration, builder.Host);
+       .AddInfrastructure(builder.Configuration, builder.Host)
+       .AddOrderStatusSse();
 
 var app = builder.Build();
 

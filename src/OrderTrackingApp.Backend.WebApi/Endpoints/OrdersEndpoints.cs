@@ -1,12 +1,14 @@
 ﻿using MediatR;
 
 using OrderTrackingApp.Backend.Application.Common.Models;
+using OrderTrackingApp.Backend.Application.IntegrationEvents.Orders;
 using OrderTrackingApp.Backend.Application.Orders.Command.Create;
 using OrderTrackingApp.Backend.Application.Orders.Command.Update;
 using OrderTrackingApp.Backend.Application.Orders.Queries.Get;
 using OrderTrackingApp.Backend.Application.Orders.Queries.GetById;
 using OrderTrackingApp.Backend.Domain.Entities;
 using OrderTrackingApp.Backend.WebApi.Endpoints.Extensions;
+using OrderTrackingApp.Backend.WebApi.Sse;
 
 namespace OrderTrackingApp.Backend.WebApi.Endpoints;
 
@@ -57,5 +59,9 @@ public static class OrdersEndpoints
          .Produces<PagedResult<Order>>()
          .ProducesProblem(400)
          .ProducesProblem(500);
+
+        g.MapGet("sse", OrderStatusSseWriter.WriteAsync)
+         .WithSummary("Streams order status changes via Server-Sent Events")
+         .Produces<OrderStatusChangedIntegrationEvent>(contentType: "text/event-stream");
     }
 }
