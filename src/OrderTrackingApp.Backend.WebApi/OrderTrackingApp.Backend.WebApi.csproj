@@ -30,5 +30,8 @@
       <Link>.dockerignore</Link>
     </Content>
   </ItemGroup>
+  <ItemGroup>
+    <InternalsVisibleTo Include="OrderTrackingApp.Backend.WebApi.Tests"/>
+  </ItemGroup>
 
 </Project>
