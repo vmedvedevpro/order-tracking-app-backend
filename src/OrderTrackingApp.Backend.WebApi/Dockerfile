@@ -8,6 +8,9 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["src/OrderTrackingApp.Backend.WebApi/OrderTrackingApp.Backend.WebApi.csproj", "src/OrderTrackingApp.Backend.WebApi/"]
+COPY ["src/OrderTrackingApp.Backend.Application/OrderTrackingApp.Backend.Application.csproj", "src/OrderTrackingApp.Backend.Application/"]
+COPY ["src/OrderTrackingApp.Backend.Domain/OrderTrackingApp.Backend.Domain.csproj", "src/OrderTrackingApp.Backend.Domain/"]
+COPY ["src/OrderTrackingApp.Backend.Infrastructure/OrderTrackingApp.Backend.Infrastructure.csproj", "src/OrderTrackingApp.Backend.Infrastructure/"]
 RUN dotnet restore "src/OrderTrackingApp.Backend.WebApi/OrderTrackingApp.Backend.WebApi.csproj"
 COPY . .
 WORKDIR "/src/src/OrderTrackingApp.Backend.WebApi"
